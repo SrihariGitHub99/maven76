@@ -1,0 +1,42 @@
+@Library('cicdlibrary')_
+pipeline{
+    agent any
+    stages{
+        stage('contidownload_master'){
+            steps{
+                script{
+                    abc.gitDownload("maven")
+                }
+            }
+        }
+        stage('contibuild_master'){
+            steps{
+                script{
+                    abc.newBuild()
+                }
+            }
+        }
+        stage('contDeployment_master'){
+            steps{
+                script{
+                    abc.newDeploy("DeclarativePipelineWithSharedLibraries", "172.31.7.67", "ZXCVBNM")
+                }
+            }
+        }
+        stage('Continoustest_master'){
+            steps{
+                script{
+                    abc.gitDownload("FunctionalTesting")
+                    abc.gitselenium("DeclarativePipelineWithSharedLibraries")
+                }
+            }
+        }
+        stage('continousdeploy_master'){
+            steps{
+                script{
+                     abc.newDeploy("DeclarativePipelineWithSharedLibraries","172.31.3.55","MNBVCXZ")
+                }
+            }
+        }
+    }
+}
