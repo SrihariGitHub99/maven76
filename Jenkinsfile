@@ -2,41 +2,19 @@
 pipeline{
     agent any
     stages{
-        stage('contidownload_master'){
+        stage('contidownload_Loans'){
             steps{
                 script{
                     abc.gitDownload("maven")
                 }
             }
         }
-        stage('contibuild_master'){
+        stage('contibuild_Loans'){
             steps{
                 script{
                     abc.newBuild()
                 }
             }
         }
-        stage('contDeployment_master'){
-            steps{
-                script{
-                    abc.newDeploy("DeclarativePipelineWithSharedLibraries", "172.31.7.67", "ZXCVBNM")
-                }
-            }
-        }
-        stage('Continoustest_master'){
-            steps{
-                script{
-                    abc.gitDownload("FunctionalTesting")
-                    abc.gitselenium("DeclarativePipelineWithSharedLibraries")
-                }
-            }
-        }
-        stage('continousdeploy_master'){
-            steps{
-                script{
-                     abc.newDeploy("DeclarativePipelineWithSharedLibraries","172.31.3.55","MNBVCXZ")
-                }
-            }
-        }
-    }
+	}
 }
